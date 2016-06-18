@@ -1,0 +1,29 @@
+<div ng-controller='topicController'>
+
+<div class="col-md-10 col-md-offset-1">
+  	<h5 style="margin-bottom:20px;"class="pull-right"><a href="#/dashboard">Dashboard</a>  | <a href="#/">Logout</a></h5><br><br>
+
+    <div style="background-color:#eee; padding:10px;margin-top:20px;">
+  	<h3><a href="#/userpage/{{topic[0]._user._id}}">{{topic[0]._user.name}}</a> posted a topic:</h3>
+  	<h3><span style="text-decoration:underline;">{{topic[0].name}}</span></h3>
+  	<h4><span>{{topic[0].description}}</span></h4>
+    </div>
+
+    <h3>Post your Answers here...</h3>
+    <textarea class="form-control" rows="5" ng-model="newPost.text"></textarea><Br />
+    <button type="button" class="btn btn-success pull-right" ng-click="addPost(newPost)">Post</button><Br /><br>
+    <hr >
+    <div class="col-md-10 col-md-offset-1" ng-repeat="post in posts| orderBy: created_at: reverse">
+      <span style="font-size:20px; font-weight:600px;"><a href="#/userpage/{{post._user._id}}">{{post._user.name}}:</a></span> &nbsp;  <span style="font-size:15px; font-weight:600px;"> {{post.text}}</span><span class="pull-right">{{post.date|date:"MM/dd/yyyy 'at' h:mma"}}</span>
+
+        <div class="col-md-10 col-md-offset-1" ng-repeat="comment in comments">
+            <div ng-if="comment._post._id == post._id">
+              <span style="color:green;font-size:18px;"><a href="#/userpage/{{comment._user._id}}">{{comment._user.name}}</a> </span>says: {{comment.text}}
+            </div>
+            </div>
+          <textarea class="form-control" rows="2" ng-model="newComment.text"></textarea>
+          <button type="button" style="margin-top:5px;margin-bottom:10px;" class="btn btn-success pull-right" ng-click="addComment(newComment, post)">Comment</button>
+
+</div>
+
+</div>

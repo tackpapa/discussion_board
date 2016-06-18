@@ -1,0 +1,48 @@
+<div ng-controller='dashController'>
+  <div class="col-md-10 col-md-offset-1">
+    <h2>Welcome, &nbsp;{{user[0]._user.name}}<a style="font-size:15px;" class="pull-right" href="#/">Logout</a></h2>
+    <input type='text' class="pull-right" placeholder='search name' ng-model='filter_name'><br><br>
+  </div>
+
+<br><br>
+
+  <div class="col-md-10 col-md-offset-1">
+    <table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Category</th>
+       <th style="width:50%">Topics</th>
+       <th>User Name</th>
+       <th>Posts</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr ng-repeat="topic in topics | filter:filter_name">
+       <td>{{topic._category.name}}</td>
+       <td><a href="#/topics/{{topic._id}}">{{topic.name}}</a></td>
+       <td><a href="#/userpage/{{topic._user._id}}">{{topic._user.name}}</a></td>
+       <td>{{topic._post.length}}</td>
+     </tr>
+
+   </tbody>
+ </table>
+<br><br>
+<h2>Add a topic</h2>
+Topic: <input type="text" class="form-control col-xs-4" ng-model="newTopic.name"><br>
+Description :<textarea class="form-control col-xs-4" ng-model="newTopic.description" rows="5"></textarea><br>
+Category : <select class="form-control" ng-options="category.name for category in category" ng-model="newTopic.category">
+        </select>
+<input type='button' value="submit" ng-click='addTopic(newTopic)'>
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+</div>
